@@ -1,0 +1,30 @@
+name: SSH Actions Demo
+
+on:
+    push:
+      branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: tty.sdf.org
+          username: alexshent
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script: touch sshactions.txt
+          
