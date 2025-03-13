@@ -19,12 +19,8 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@v1.2.2
-        with:
-          host: 92.113.18.216
-          username: u442453973
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: 65002
-          script: ls -la
+      - name: rsync deployments
+        run: |
+          apt-get install sshpass
+          rsync -e "sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -p 65002" --archive --compress --delete ./src u442453973@92.113.18.216:/home/u442453973/domains/crm.cv.ua/public_html/r-dev/www/
           
