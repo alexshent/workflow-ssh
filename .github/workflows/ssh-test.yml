@@ -22,9 +22,9 @@ jobs:
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v1.2.2
         with:
-          host: tty.sdf.org
-          username: alexshent
+          host: 92.113.18.216
+          username: u442453973
           password: ${{ secrets.SSH_PASSWORD }}
-          port: 22
-          script: touch sshactions.txt
+          port: 65002
+          script: touch $(date '+%H%M%S').txt
           
