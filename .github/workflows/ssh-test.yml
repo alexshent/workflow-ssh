@@ -26,5 +26,5 @@ jobs:
           username: u442453973
           password: ${{ secrets.SSH_PASSWORD }}
           port: 65002
-          script: touch $(date '+%H%M%S').txt
+          script: ls -la
           
