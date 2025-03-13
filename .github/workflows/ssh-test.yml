@@ -16,8 +16,7 @@ jobs:
 
       - name: rsync deployments
         run: |
-          set -eu
           mkdir "$HOME/.ssh"
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > "$HOME/.ssh/key"
           chmod 600 "$HOME/.ssh/key"
-          rsync -e "ssh -p 65002 -i $HOME/.ssh/key" --archive --compress --delete ./src u442453973@92.113.18.216:/home/u442453973/domains/crm.cv.ua/public_html/r-dev/www/
+          rsync -e "ssh -p 65002 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete ./src u442453973@92.113.18.216:/home/u442453973/domains/crm.cv.ua/public_html/r-dev/www/
