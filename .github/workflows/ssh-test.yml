@@ -21,6 +21,6 @@ jobs:
 
       - name: rsync deployments
         run: |
-          apt-get install sshpass
+          echo zzz
           rsync -e "sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -p 65002" --archive --compress --delete ./src u442453973@92.113.18.216:/home/u442453973/domains/crm.cv.ua/public_html/r-dev/www/
           
