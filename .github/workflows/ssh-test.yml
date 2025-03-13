@@ -14,13 +14,10 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-
       - name: rsync deployments
         run: |
-          echo zzz
-          rsync -e "sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -p 65002" --archive --compress --delete ./src u442453973@92.113.18.216:/home/u442453973/domains/crm.cv.ua/public_html/r-dev/www/
-          
+          set -eu
+          mkdir "$HOME/.ssh"
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > "$HOME/.ssh/key"
+          chmod 600 "$HOME/.ssh/key"
+          rsync -e "ssh -p 65002 -i $HOME/.ssh/key" --archive --compress --delete ./src u442453973@92.113.18.216:/home/u442453973/domains/crm.cv.ua/public_html/r-dev/www/
